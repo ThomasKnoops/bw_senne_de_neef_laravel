@@ -3,3 +3,4 @@
 - https://larainfo.com/blogs/install-tailwind-css-3-in-laravel-9-with-vite-3
 - https://flowbite.com
 - https://webdevetc.com/blog/laravel-naming-conventions/
+- https://laravel.com/docs/9.x/eloquent-relationships

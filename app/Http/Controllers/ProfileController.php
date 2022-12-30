@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Profile $profile)
     {
         //
     }
@@ -52,10 +52,10 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Profile $profile)
     {
         //
     }
@@ -64,10 +64,10 @@ class NewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Profile $profile)
     {
         //
     }
@@ -75,10 +75,10 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Profile $profile)
     {
         //
     }
