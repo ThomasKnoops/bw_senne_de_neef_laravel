@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -96,20 +102,20 @@ use Illuminate\Support\Facades\Route;
  */
 //# [GUEST]
 Route::middleware('guest')->group(function(){
-    Route::get('/login')->name('login.index');
-    Route::post('/login')->name('login.store');
-    Route::get('/register')->name('register.index');
-    Route::post('/register')->name('register.store');
-    Route::get('/forgot-password')->name('forgot-password.index');
-    Route::post('/forgot-password')->name('forgot-password.store');
-    Route::get('/reset-password')->name('reset-password.index');
-    Route::patch('/reset-password')->name('reset-password.update');
+    Route::get('/login', [LoginController::class, 'show'])->name('login.index');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::get('/register', [RegisterController::class, 'show'])->name('register.index');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'show'])->name('forgot-password.index');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('forgot-password.store');
+    Route::get('/reset-password', [ResetPasswordController::class, 'show'])->name('reset-password.index');
+    Route::patch('/reset-password', [ResetPasswordController::class, 'store'])->name('reset-password.update');
 });
 //# [AUTH]
 Route::middleware('auth')->group(function(){
-    Route::get('/change-password')->name('change-password.index');
-    Route::patch('/change-password')->name('change-password.update');
-    Route::post('/logout')->name('logout.delete');
+    Route::get('/change-password', [ChangePasswordController::class, 'show'])->name('change-password.index');
+    Route::patch('/change-password', [ChangePasswordController::class, 'store'])->name('change-password.update');
+    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout.delete');
 });
 
 /*
@@ -117,29 +123,29 @@ Route::middleware('auth')->group(function(){
  */
 //# [AUTH]
 Route::middleware('auth')->group(function(){
-    Route::get('/profile')->name('profile.index');
-    Route::get('/profile/edit')->name('profile.edit');
-    Route::patch('/profile')->name('profile.update');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 //# [ANY]
-Route::get('/profile/{id}')->name('profile.show');
+Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 
 /*
  *  Project
  */
 //# [AUTH]
 Route::middleware('auth')->group(function(){
-    Route::get('/project/create')->name('project.create');
-    Route::post('/project/create')->name('project.store');
+    Route::get('/project/create', [Projectcontroller::class, 'create'])->name('project.create');
+    Route::post('/project/create', [Projectcontroller::class, 'store'])->name('project.store');
 
     //(owned)
-    Route::get('/project/{id}/edit')->name('project.edit');
-    Route::patch('/project/{id}')->name('project.update');
-    Route::delete('/project/{id}')->name('project.delete');
+    Route::get('/project/{id}/edit', [Projectcontroller::class, 'edit'])->name('project.edit');
+    Route::patch('/project/{id}', [Projectcontroller::class, 'update'])->name('project.update');
+    Route::delete('/project/{id}', [Projectcontroller::class, 'destroy'])->name('project.delete');
 
 });
 //# [ANY]
-Route::get('/project/{id}')->name('project.show');
+Route::get('/project/{id}', [Projectcontroller::class, 'show'])->name('project.show');
 
 /*
  *  Contact
@@ -147,11 +153,11 @@ Route::get('/project/{id}')->name('project.show');
 //# [AUTH]
 Route::middleware('auth')->group(function(){
     //(adm)
-    Route::get('/contact/all')->name('contact.show');
+    Route::get('/contact/all', [ContactController::class, 'index'])->name('contact.index');
 });
 //# [ANY]
-Route::get('/contact')->name('contact.index');
-Route::post('/contact')->name('contact.store');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 /*
  *  FAQ
@@ -160,21 +166,21 @@ Route::post('/contact')->name('contact.store');
 Route::middleware('auth')->group(function(){
 
     //(adm)
-    Route::get('/faq/create')->name('faq.category.create');
-    Route::post('/faq/create')->name('faq.category.store');
+    Route::get('/faq/create', [FaqController::class, 'categoryCreate'])->name('faq.category.create');
+    Route::post('/faq/create', [FaqController::class, 'categoryStore'])->name('faq.category.store');
 
-    Route::patch('/faq/{id}')->name('faq.category.update');
-    Route::delete('/faq/{id}')->name('faq.category.delete');
+    Route::patch('/faq/{id}', [FaqController::class, 'categoryUpdate'])->name('faq.category.update');
+    Route::delete('/faq/{id}', [FaqController::class, 'categoryDelete'])->name('faq.category.delete');
 
-    Route::get('/faq/{id}/create')->name('faq.question.create');
-    Route::post('/faq/{id}/create')->name('faq.question.store');
-    Route::patch('/faq/{cid}/{qid}')->name('faq.question.update');
-    Route::patch('/faq/{cid}/{qid}')->name('faq.question.delete');
+    Route::get('/faq/{id}/create', [FaqController::class, 'questionCreate'])->name('faq.question.create');
+    Route::post('/faq/{id}/create', [FaqController::class, 'questionStore'])->name('faq.question.store');
+    Route::patch('/faq/{cid}/{qid}', [FaqController::class, 'questionUpdate'])->name('faq.question.update');
+    Route::patch('/faq/{cid}/{qid}', [FaqController::class, 'questionDelete'])->name('faq.question.delete');
 
 });
 //# [ANY]
-Route::get('/faq')->name('faq.index');
-Route::get('/faq/{id}')->name('faq.category.index');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+Route::get('/faq/{id}', [FaqController::class, 'categoryIndex'])->name('faq.category.index');
 
 /*
  *  HOME
