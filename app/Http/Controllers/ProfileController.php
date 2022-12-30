@@ -7,18 +7,18 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function show() {
-
+    public function show(Request $request, $id) {
+        return view('pages.Profile.show');
     }
 
-    public function index() {
-
+    public function index(Request $request) {
+        return view('pages.Profile.index');
     }
 
-    public function edit() {
-
+    public function edit(Request $request, $id) {
+        return view('pages.Profile.edit');
     }
-    public function update() {
+    public function update(Request $request, $id) {
 
     }
 }
