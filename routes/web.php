@@ -102,18 +102,18 @@ use Illuminate\Support\Facades\Route;
  */
 //# [GUEST]
 Route::middleware('guest')->group(function(){
-    Route::get('/login', [LoginController::class, 'show'])->name('login.index');
+    Route::get('/login', [LoginController::class, 'show'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-    Route::get('/register', [RegisterController::class, 'show'])->name('register.index');
+    Route::get('/register', [RegisterController::class, 'show'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-    Route::get('/forgot-password', [ForgotPasswordController::class, 'show'])->name('forgot-password.index');
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'show'])->name('forgot-password');
     Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('forgot-password.store');
-    Route::get('/reset-password', [ResetPasswordController::class, 'show'])->name('reset-password.index');
+    Route::get('/reset-password', [ResetPasswordController::class, 'show'])->name('reset-password');
     Route::patch('/reset-password', [ResetPasswordController::class, 'store'])->name('reset-password.update');
 });
 //# [AUTH]
 Route::middleware('auth')->group(function(){
-    Route::get('/change-password', [ChangePasswordController::class, 'show'])->name('change-password.index');
+    Route::get('/change-password', [ChangePasswordController::class, 'show'])->name('change-password');
     Route::patch('/change-password', [ChangePasswordController::class, 'store'])->name('change-password.update');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout.delete');
 });
