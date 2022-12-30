@@ -8,9 +8,11 @@
     </head>
     <body>
         <div class="app">
-            <main>
+            @include('partials.header')
+            <main class="container mx-auto">
                 {{$slot}}
             </main>
+            @include('partials.footer')
         </div>
     </body>
 </html>
