@@ -4,3 +4,5 @@
 - https://flowbite.com
 - https://webdevetc.com/blog/laravel-naming-conventions/
 - https://laravel.com/docs/9.x/eloquent-relationships
+- https://laravel.com/docs/9.x/authentication
+- https://laravel.com/docs/9.x/sanctum

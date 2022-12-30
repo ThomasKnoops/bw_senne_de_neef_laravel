@@ -7,48 +7,187 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+ *  Format: [{METHOD}] [{AUTH_TYPE}] {PATH}
+ *
+ *  Types of METHOD
+ *  - [GET] -> read resource
+ *  - [POST] -> create new resource
+ *  - [PATCH] -> modify existing resource
+ *  - [PUT] -> replace existing resource completely
+ *  - [DELETE] -> delete resource
+ *
+ *  Types of AUTH
+ *  - [GUEST] Is not allowed to be authenticated
+ *  - [AUTH]  Has to be authenticated
+ *  - [AUTH OWN]  ^ but explictly be the resource owner
+ *  - [AUTH ADM]  ^ but also be an admin
+ *  - [ANY]   May be authenticated but not required
+ *
+ *
+ * Routes:
+ *
+ *  Auth:
+ *
+ *  - [GET]  [GUEST] /login
+ *  - [POST] [GUEST] /login
+ *  - [GET]  [GUEST] /register
+ *  - [POST] [GUEST] /register
+ *  - [GET]  [GUEST] /forgot-password
+ *  - [POST] [GUEST] /forgot-password
+ *  - [GET]  [GUEST] /reset-password
+ *  - [POST] [GUEST] /reset-password
+ *  - [GET]  [AUTH]  /change-password
+ *  - [POST] [AUTH]  /change-password
+ *  - [POST] [AUTH]  /logout
+ *
+ *  Profile:
+ *
+ *  - [GET]   [AUTH]  /profile
+ *  - [PATCH] [AUTH]  /profile
+ *  - [GET]   [ANY]   /profile/{id}
+ *
+ *  Project:
+ *
+ *  - [GET]    [AUTH]      /project/create
+ *  - [POST]   [AUTH]      /project/create
+ *  - [GET]    [ANY]       /project/{id}
+ *  - [GET]    [AUTH OWN]  /project/{id}/edit
+ *  - [PATCH]  [AUTH OWN]  /project/{id}
+ *  - [DELETE] [AUTH OWN]  /project/{id}
+ *
+ *  Contact:
+ *
+ *  - [GET]  [ANY]      /contact
+ *  - [POST] [ANY]      /contact
+ *  - [GET]  [AUTH ADM] /contact/all
+ *
+ *  FAQ:
+ *
+ *  - [GET]    [ANY]      /faq
+ *  - [GET]    [AUTH ADM] /faq/create
+ *  - [POST]   [AUTH ADM] /faq/create
+ *  - [GET]    [ANY]      /faq/{id}
+ *  - [PATCH]  [AUTH ADM] /faq/{id}
+ *  - [DELETE] [AUTH ADM] /faq/{id}
+ *  - [GET]    [AUTH ADM] /faq/{id}/create
+ *  - [POST]   [AUTH ADM] /faq/{id}/create
+ *  - [PATCH]  [AUTH ADM] /faq/{cid}/{qid}
+ *  - [DELETE] [AUTH ADM] /faq/{cid}/{qid}
+ *
+ *  News:
+ *
+ *  - [GET]    [AUTH ADM] /news/create
+ *  - [POST]   [AUTH ADM] /news/create
+ *  - [GET]    [ANY]      /news/{id}
+ *  - [PATCH]  [AUTH ADM] /news/{id}
+ *  - [DELETE] [AUTH ADM] /news/{id}
+ *
+ *  Home:
+ *
+ *  - [GET] [ANY] /
+ *
+ *  About:
+ *
+ *  - [GET] [ANY] /about
+ */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/about', function () {
-    return view('pages.About.show');
-})->name('about');
+/*
+ * Auth
+ */
+//# [GUEST]
+Route::middleware('guest')->group(function(){
+    Route::get('/login')->name('login.index');
+    Route::post('/login')->name('login.store');
+    Route::get('/register')->name('register.index');
+    Route::post('/register')->name('register.store');
+    Route::get('/forgot-password')->name('forgot-password.index');
+    Route::post('/forgot-password')->name('forgot-password.store');
+    Route::get('/reset-password')->name('reset-password.index');
+    Route::patch('/reset-password')->name('reset-password.update');
+});
+//# [AUTH]
+Route::middleware('auth')->group(function(){
+    Route::get('/change-password')->name('change-password.index');
+    Route::patch('/change-password')->name('change-password.update');
+    Route::post('/logout')->name('logout.delete');
+});
 
 /*
  * Profile
  */
-Route::get('/profile', [UserController::class, 'index'])->name('profile.index');
-Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
+//# [AUTH]
+Route::middleware('auth')->group(function(){
+    Route::get('/profile')->name('profile.index');
+    Route::get('/profile/edit')->name('profile.edit');
+    Route::patch('/profile')->name('profile.update');
+});
+//# [ANY]
+Route::get('/profile/{id}')->name('profile.show');
 
 /*
  *  Project
  */
-Route::get('/project/create',[ProjectController::class, 'create'])->name('project.create');
-Route::post('/project/create',[ProjectController::class, 'store'])->name('project.store');
+//# [AUTH]
+Route::middleware('auth')->group(function(){
+    Route::get('/project/create')->name('project.create');
+    Route::post('/project/create')->name('project.store');
 
-Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show');
-Route::get('/project/{id}/edit', [ProjectController::class, 'edit'])->name('project.edit');
-Route::patch('/project/{id}', [ProjectController::class, 'update'])->name('project.update');
-Route::delete('/project/{id}', [ProjectController::class, 'delete'])->name('project.delete');
+    //(owned)
+    Route::get('/project/{id}/edit')->name('project.edit');
+    Route::patch('/project/{id}')->name('project.update');
+    Route::delete('/project/{id}')->name('project.delete');
 
+});
+//# [ANY]
+Route::get('/project/{id}')->name('project.show');
 
 /*
  *  Contact
  */
-Route::get('/contact/',[ContactController::class, 'index'])->name('contact.index');
+//# [AUTH]
+Route::middleware('auth')->group(function(){
+    //(adm)
+    Route::get('/contact/all')->name('contact.show');
+});
+//# [ANY]
+Route::get('/contact')->name('contact.index');
+Route::post('/contact')->name('contact.store');
 
 /*
  *  FAQ
  */
-Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+//# [AUTH]
+Route::middleware('auth')->group(function(){
+
+    //(adm)
+    Route::get('/faq/create')->name('faq.category.create');
+    Route::post('/faq/create')->name('faq.category.store');
+
+    Route::patch('/faq/{id}')->name('faq.category.update');
+    Route::delete('/faq/{id}')->name('faq.category.delete');
+
+    Route::get('/faq/{id}/create')->name('faq.question.create');
+    Route::post('/faq/{id}/create')->name('faq.question.store');
+    Route::patch('/faq/{cid}/{qid}')->name('faq.question.update');
+    Route::patch('/faq/{cid}/{qid}')->name('faq.question.delete');
+
+});
+//# [ANY]
+Route::get('/faq')->name('faq.index');
+Route::get('/faq/{id}')->name('faq.category.index');
+
+/*
+ *  HOME
+ */
+//# [ANY]
+Route::get('/', function () {
+    return view('pages.Home.home');
+})->name('home');
+
+/*
+ *  ABOUT
+ */
+//# [ANY]
+Route::get('/about', function () {
+    return view('pages.About.show');
+})->name('about');
