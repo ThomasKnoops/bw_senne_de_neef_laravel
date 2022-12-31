@@ -9,7 +9,7 @@
     <body>
         <div class="app">
             @include('partials.header')
-            <main class="container mx-auto">
+            <main>
                 {{$slot}}
             </main>
             @include('partials.footer')
