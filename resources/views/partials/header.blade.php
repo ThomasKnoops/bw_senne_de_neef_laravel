@@ -1,7 +1,8 @@
 <?php
 
     $commonRoutes = [
-        'home' => 'Home'
+        'home' => 'Home',
+        'profiles' => 'Profiles'
     ];
     $guestRoutes = [
         'login' => 'Login',

@@ -124,12 +124,13 @@ Route::middleware('auth')->group(function(){
  */
 //# [AUTH]
 Route::middleware('auth')->group(function(){
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 //# [ANY]
 Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profiles', [ProfileController::class, 'all'])->name('profiles');
 
 /*
  *  Project
