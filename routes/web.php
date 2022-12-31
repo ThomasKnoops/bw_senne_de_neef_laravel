@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
@@ -186,9 +187,7 @@ Route::get('/faq/{id}', [FaqController::class, 'categoryIndex'])->name('faq.cate
  *  HOME
  */
 //# [ANY]
-Route::get('/', function () {
-    return view('pages.Home.home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /*
  *  ABOUT

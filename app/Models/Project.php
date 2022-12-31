@@ -2,23 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends Model
 {
     use HasFactory;
+    use HasUlids;
 
     //a project belongs to a single profile
-    public function profile(): BelongsTo {
-        return $this->belongsTo(Profile::class);
-    }
-
-    //a project can have multiple reports
-    public function reports() : HasMany {
-        return $this->hasMany(Report::class);
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
     }
 
 }

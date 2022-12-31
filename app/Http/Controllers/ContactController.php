@@ -9,7 +9,7 @@ class ContactController extends Controller
     public function index(Request $request) {
         return view('pages.Contact.index');
     }
-    public function show(Request $request, $id) {
+    public function show(Request $request) {
         return view('pages.Contact.show');
     }
     public function store(Request $request) {
