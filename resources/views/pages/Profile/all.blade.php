@@ -1,3 +1,7 @@
 <x-layout-default title="Profiles">
-{{$users}}
+@foreach($users as $user)
+    <div class="text-wrap">
+        {{$user}}
+    </div>
+@endforeach
 </x-layout-default>

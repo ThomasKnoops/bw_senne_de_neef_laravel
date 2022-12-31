@@ -6,3 +6,4 @@
 - https://laravel.com/docs/9.x/eloquent-relationships
 - https://laravel.com/docs/9.x/authentication
 - https://laravel.com/docs/9.x/sanctum
+- https://getbootstrap.com/docs/5.2/getting-started/vite/
