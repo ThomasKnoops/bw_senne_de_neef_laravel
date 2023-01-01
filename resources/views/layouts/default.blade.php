@@ -1,3 +1,6 @@
+<?php
+    $navbarBrand = 'Mijn Laravel Project';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

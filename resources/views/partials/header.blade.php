@@ -17,7 +17,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #111827">
         <a href="{{route('home')}}" class="navbar-brand ms-5">
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Mijn Laravel Project</span>
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">{{$navbarBrand}}</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
             <span class="navbar-toggler-icon"></span>
