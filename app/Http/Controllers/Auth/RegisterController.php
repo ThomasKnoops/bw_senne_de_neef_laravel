@@ -32,7 +32,8 @@ class RegisterController extends Controller
             "password" => Hash::make($validated['password']),
             "first_name" => $validated['first_name'],
             "last_name" => $validated['last_name'],
-            "birthdate" => $validated['birthdate']
+            "birthdate" => $validated['birthdate'],
+            "short_description" => $validated['username']."'s profile."
         ]);
 
         Auth::login($user);

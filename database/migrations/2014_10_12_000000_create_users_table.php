@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->date('birthdate');
+            $table->text('short_description');
             $table->text('biography')->nullable();
             $table->string('avatar')->default('default.png');
             $table->string('email')->unique();
