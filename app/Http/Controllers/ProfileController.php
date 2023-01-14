@@ -6,6 +6,7 @@ use App\Models\Profile;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -21,7 +22,9 @@ class ProfileController extends Controller
     }
 
     public function index(Request $request) {
-        return view('pages.Profile.index');
+        $user = Auth::user();
+        $projects = Project::where('user_id', $user->id)->latest()->paginate(5);
+        return view('pages.Profile.index', compact('user', 'projects'));
     }
 
     public function edit(Request $request, $id) {
