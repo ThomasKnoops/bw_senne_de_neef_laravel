@@ -1,6 +1,7 @@
 <x-layout-default title="Edit Profile">
 
     <form method="POST" action="{{ route('profile.update.avatar') }}" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         <div class="row mb-3">
             <label for="avatar" class="col-md-4 col-form-label text-md-end">Current Avatar</label>

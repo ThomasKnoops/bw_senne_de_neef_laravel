@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -58,7 +59,15 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $validated = $request->validate([
-            'profile_avatar'      => 'required|image',
+            'profile_avatar'      => 'required|image|mimes:png|max:4096',
         ]);
+
+        $avatar= $validated['profile_avatar'];
+        $imageNew = Image::make($avatar);
+        $imageFinal = $imageNew->resize(150, 150);
+        $imageFinal->save('assets/profile/'. $user->id . '-avatar.png');
+
+        $user->avatar = $user->id . '-avatar.png';
+        $user->save();
     }
 }

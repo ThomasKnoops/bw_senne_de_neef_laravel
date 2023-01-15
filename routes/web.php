@@ -139,7 +139,7 @@ Route::get('/profiles', [ProfileController::class, 'all'])->name('profiles');
 //# [AUTH]
 Route::middleware('auth')->group(function(){
     Route::get('/project/create', [Projectcontroller::class, 'create'])->name('project.create');
-    Route::post('/project/create', [Projectcontroller::class, 'store'])->name('project.store');
+    Route::put('/project/create', [Projectcontroller::class, 'store'])->name('project.store');
 
     //(owned)
     Route::get('/project/{id}/edit', [Projectcontroller::class, 'edit'])->name('project.edit');

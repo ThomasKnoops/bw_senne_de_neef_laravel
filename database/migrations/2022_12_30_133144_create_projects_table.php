@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignUlid('user_id');
             $table->string('title');
             $table->text('content');
+            $table->text('thumbnail');
+            $table->text('cover');
         });
     }
 

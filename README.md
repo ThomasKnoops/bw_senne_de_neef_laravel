@@ -10,3 +10,5 @@
 - https://www.itsolutionstuff.com/post/laravel-profile-image-upload-tutorial-with-exampleexample.html
 - https://startbootstrap.com
 - https://startbootstrap.com/template/full-width-pics
+- https://www.akilischool.com/cours/manipuler-les-images-dans-laravel-5
+- https://stackoverflow.com/questions/34009844/gd-library-extension-not-available-with-this-php-installation-ubuntu-nginx
