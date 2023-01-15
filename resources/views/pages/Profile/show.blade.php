@@ -63,7 +63,9 @@
                 </div>
             @endforeach
 
-
         </div>
+        <nav class="mx-3 mt-2">
+            {{$projects->links()}}
+        </nav>
     </div>
 </x-layout-default>

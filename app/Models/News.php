@@ -10,4 +10,10 @@ class News extends Model
 {
     use HasFactory;
     use HasUlids;
+
+    protected $fillable = [
+        'title',
+        'content',
+        'image',
+    ];
 }

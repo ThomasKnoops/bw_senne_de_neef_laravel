@@ -130,6 +130,11 @@ class ProjectController extends Controller
     }
 
     public function destroy(Request $request, $id) {
-
+        $project = Project::findOrFail($id);
+        if(Auth::user()->id != $project->user_id) {
+            abort(403, 'Only admins are allowed to use this route'); //forbidden
+        }
+        Project::destroy($id);
+        return redirect()->route('profile');
     }
 }

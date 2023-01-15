@@ -47,18 +47,19 @@
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="{{route('project.show', $project->id)}}" class="btn btn-success">View</a>
                                 <a href="{{route('project.edit', $project->id)}}" class="btn btn-warning">Edit</a>
-                                <form method="POST">
+                                <form action="{{route('project.delete', $project->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <a href="{{route('project.delete', $project->id)}}" class="btn btn-danger">Delete</a>
+                                    <button class="btn btn-danger">Delete</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
-
-
         </div>
+        <nav class="mx-3 mt-2">
+            {{$projects->links()}}
+        </nav>
     </div>
 </x-layout-default>

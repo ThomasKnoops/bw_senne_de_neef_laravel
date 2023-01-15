@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
@@ -219,4 +220,17 @@ Route::middleware('auth')->group(function(){
     //(adm)
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
+});
+
+/*
+ *  NEWS
+ */
+//# ADM
+Route::middleware('auth')->group(function (){
+   Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+   Route::post('/news/create', [NewsController::class, 'store'])->name('news.store');
+   Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
+    Route::patch('/news/{id}/image', [NewsController::class, 'update_image'])->name('news.update_image');
+   Route::patch('/news/{id}', [NewsController::class, 'update'])->name('news.update');
+   Route::delete('/news/{id}', [NewsController::class, 'delete'])->name('news.delete');
 });
