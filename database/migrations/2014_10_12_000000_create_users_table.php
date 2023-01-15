@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('birthdate');
             $table->text('short_description');
             $table->text('biography')->nullable();
-            $table->string('avatar')->default('default.png');
+            $table->string('avatar')->default('default-avatar.png');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

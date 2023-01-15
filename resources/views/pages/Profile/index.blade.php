@@ -5,6 +5,7 @@
         <div class="text-center my-5">
             <img class="img-fluid rounded-circle mb-4" src="/assets/profile/{{$user->avatar}}" alt="..." />
             <h1 class="text-white fs-3 fw-bolder">{{$user->first_name}} {{$user->last_name}} (&#64;{{$user->username}})</h1>
+            <p class="text-white-50">Birthdate: {{$user->birthdate}}</p>
             <p class="text-white-50 mb-0">{{$user->biography}}</p>
         </div>
     </div>
