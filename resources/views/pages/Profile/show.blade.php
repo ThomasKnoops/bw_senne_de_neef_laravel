@@ -10,6 +10,28 @@
         </div>
     </div>
 
+
+    <!-- Only show this button when the current user is an admin but the profile on this page is not. -->
+    @auth()
+        @if(!$user->isAdmin())
+            @if(Auth::user()->isAdmin())
+                <div>
+                    <form method="POST" action="{{route('profile.admin', $user->id)}}">
+                        @method('PATCH')
+                        @csrf
+                        <button class="btn btn-danger">Promote this user to the ADMIN role</button>
+                    </form>
+                    <!--
+                    <p>You are an admin looking at a non-admin user profile.</p>
+                    -->
+                </div>
+            @endif
+        @else
+            <p class="text-bg-warning text-bg-danger">This user has the ADMIN role.</p>
+        @endif
+    @endauth
+
+
     <div class="container px-4 px-lg-5 mt-5">
         <hr/>
         <h2>My Projects</h2>

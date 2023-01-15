@@ -128,6 +128,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/avatar', [ProfileController::class, 'update_avatar'])->name('profile.update.avatar');
+
+    Route::patch('/profile/{id}/admin', [ProfileController::class, 'promote_to_admin'])->name('profile.admin');
 });
 //# [ANY]
 Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');

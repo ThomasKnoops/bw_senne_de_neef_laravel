@@ -70,4 +70,14 @@ class ProfileController extends Controller
         $user->avatar = $user->id . '-avatar.png';
         $user->save();
     }
+
+    public function promote_to_admin(Request $request, $id) {
+        if(Auth::user()->isAdmin()) {
+         $target_user = User::findOrFail($id);
+         $target_user->admin = true;
+         $target_user->save();
+            return redirect()->route('profile.show', $id);
+        }
+        abort(403);
+    }
 }
