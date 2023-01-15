@@ -5,7 +5,7 @@
         <div class="row mb-3">
             <label for="avatar" class="col-md-4 col-form-label text-md-end">Current Avatar</label>
             <div class="col-md-6">
-                <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ old('avatar') }}" required autocomplete="avatar">
+                <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="profile_avatar" value="{{ old('avatar') }}" required autocomplete="avatar">
                 <img src="/assets/profile/{{$user->avatar}}" style="width:80px;margin-top: 10px;">
                 @error('avatar')
                 <span class="invalid-feedback" role="alert">
@@ -15,49 +15,63 @@
 
 
                 <div class="mb-3">
-                    <input class="form-control" type="submit" value="Update Avatar">
+                    <input class="form-control btn btn-primary" type="submit" value="Update Avatar">
                 </div>
             </div>
         </div>
-
     </form>
 
     <div class="row mb-3">
-    <div class="col-md-6">
-    <div class="mb-2">
-        <label class="form-label">Username:</label>
-        <input class="form-control" type="text" name="username" disabled value="{{$user->username}}">
+        <label for="avatar" class="col-md-4 col-form-label text-md-end">Username:</label>
+        <div class="col-md-6">
+            <input class="form-control" type="text" name="username" readonly disabled value="{{$user->username}}">
+        </div>
     </div>
-    <form method="POST" action="{{route('profile.update')}}">
+
+    <form action="{{route('profile.update')}}" method="POST">
+        @method('PUT')
         @csrf
-        <div class="mb-2">
-            <label class="form-label">First Name:</label>
-            <input class="form-control" type="text" name="first_name" minlength="2" maxlength="255" required value="{{$user->first_name}}">
-        </div>
-        <div class="mb-2">
-            <label class="form-label">Last Name:</label>
-            <input class="form-control" type="text" name="last_name" minlength="2" maxlength="255" required value="{{$user->last_name}}">
+
+        <div class="row mb-3">
+            <label for="avatar" class="col-md-4 col-form-label text-md-end">First Name:</label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" name="profile_first_name" minlength="2" maxlength="255" required value="{{$user->first_name}}">
+            </div>
         </div>
 
-        <div class="mb-2">
-            <label class="form-label">Short Description:</label>
-            <input class="form-control" type="text" name="profile_description" minlength="2" maxlength="255" required value="{{$user->short_description}}">
+        <div class="row mb-3">
+            <label for="avatar" class="col-md-4 col-form-label text-md-end">Last Name:</label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" name="profile_last_name" minlength="2" maxlength="255" required value="{{$user->last_name}}">
+            </div>
         </div>
 
-        <div class="mb-2">
-            <label class="form-label">Biography:</label>
-            <input class="form-control" type="text" name="profile_biography" minlength="2" maxlength="255" required value="{{$user->biography}}">
+        <div class="row mb-3">
+            <label for="avatar" class="col-md-4 col-form-label text-md-end">Short Description:</label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" name="profile_description" minlength="2" maxlength="255" required value="{{$user->short_description}}">
+            </div>
         </div>
 
-        <div class="mb-2">
-            <label class="form-label">Birthdate:</label>
-            <input class="form-control" type="date" name="birthdate" required value="{{$user->birthdate}}">
+        <div class="row mb-3">
+            <label for="avatar" class="col-md-4 col-form-label text-md-end">Biography:</label>
+            <div class="col-md-6">
+                <textarea class="form-control" style="resize: none" rows="8" name="profile_biography" minlength="2" maxlength="472" required>{{$user->biography}}</textarea>
+            </div>
         </div>
 
-        <div class="mb-2">
-            <input class="form-control" type="submit" value="Edit Profile">
+        <div class="row mb-3">
+            <label for="avatar" class="col-md-4 col-form-label text-md-end">Birthdate:</label>
+            <div class="col-md-6">
+                <input class="form-control" type="date" name="profile_birthdate" required value="{{$user->birthdate}}">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="avatar" class="col-md-4 col-form-label text-md-end"></label>
+            <div class="col-md-6">
+                <input class="form-control btn btn-primary" type="submit" value="Update Profile">
+            </div>
         </div>
     </form>
-    </div>
-    </div>
 </x-layout-default>

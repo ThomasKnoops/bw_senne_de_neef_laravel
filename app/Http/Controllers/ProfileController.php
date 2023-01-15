@@ -33,6 +33,32 @@ class ProfileController extends Controller
         return view('pages.Profile.edit', compact('user'));
     }
     public function update(Request $request) {
+        $user = Auth::user();
 
+        $validated = $request->validate([
+            'profile_first_name'    => 'required|max:255',
+            'profile_last_name'     => 'required|max:255',
+            'profile_description' => 'required|max:255',
+            'profile_biography' => 'required|max:472',
+            'profile_birthdate' => 'required',
+        ]);
+
+        $user->first_name = $validated['profile_first_name'];
+        $user->last_name = $validated['profile_last_name'];
+        $user->short_description = $validated['profile_description'];
+        $user->biography = $validated['profile_biography'];
+        $user->birthdate = $validated['profile_birthdate'];
+
+        $user->save();
+
+        return redirect()->route('profile');
+    }
+
+    public function update_avatar(Request $request) {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'profile_avatar'      => 'required|image',
+        ]);
     }
 }
