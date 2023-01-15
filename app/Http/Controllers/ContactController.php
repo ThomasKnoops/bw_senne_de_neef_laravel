@@ -10,10 +10,11 @@ class ContactController extends Controller
 {
     public function index(Request $request) {
         if(Auth::user()->isAdmin()) {
-            return view('pages.Contact.index');
+
+            $contacts = Contact::where('state', 0)->paginate(10);
+            return view('pages.Contact.index', compact('contacts'));
         }
-        $contacts = Contact::where('state', 0)->paginate(10);
-        abort(403, 'Only admins are allowed to use this route', compact('contacts'));
+        abort(403, 'Only admins are allowed to use this route');
     }
     public function show(Request $request) {
         return view('pages.Contact.show');
@@ -33,5 +34,36 @@ class ContactController extends Controller
         $contact->save();
 
         return redirect()->route('home');
+    }
+
+    public function answer_show(Request $request, $id) {
+        if(!Auth::user()->isAdmin()){
+            abort(403, "This is a route for admins");
+        }
+        $contact = Contact::findOrFail($id);
+        return view('pages.Contact.answer', compact('contact'));
+    }
+
+    public function answer_store(Request $request, $id) {
+        if(!Auth::user()->isAdmin()){
+            abort(403, "This is a route for admins");
+        }
+        $validated = $request->validate([
+            'answer'          => 'required|max:255'
+        ]);
+
+        $contact = Contact::findOrFail($id);
+        $contact->state = 1;
+        $contact->answer = $validated['answer'];
+        $contact->save();
+        return redirect()->route('admin.index');
+    }
+
+    public function destroy(Request $request, $id) {
+        if(!Auth::user()->isAdmin()){
+            abort(403, "This is a route for admins");
+        }
+        Contact::destroy($id);
+        return redirect()->route('admin.index');
     }
 }

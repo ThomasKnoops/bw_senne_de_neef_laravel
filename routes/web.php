@@ -163,6 +163,9 @@ Route::get('/project/{id}', [Projectcontroller::class, 'show'])->name('project.s
 Route::middleware('auth')->group(function(){
     //(adm)
     Route::get('/contact/all', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/contact/{id}/answer', [ContactController::class, 'answer_show'])->name('contact.answer_show');
+    Route::post('/contact/{id}/answer', [ContactController::class, 'answer_store'])->name('contact.answer_store');
+    Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contact.delete');
 });
 //# [ANY]
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');

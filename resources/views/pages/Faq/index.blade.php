@@ -17,9 +17,9 @@
                                         <div class="accordion-body">
                                             <div class="accordion">
                                                 <!-- foreach faq cat question-->
+                                                <strong>Questions:</strong>
                                                 @foreach($category->questions as $question)
                                                     <div class="accordion-item">
-                                                        <strong>Questions:</strong>
                                                         <h3 class="accordion-header">
                                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqq_{{$question->id}}">
                                                                 {{$question->question}}
@@ -47,17 +47,17 @@
                                     <div class="accordion-body">
                                         <div class="accordion">
                                             <!-- foreach faq cat question-->
+                                            <strong>Questions:</strong>
                                             @foreach($contacts as $question)
                                                 <div class="accordion-item">
-                                                    <strong>Questions:</strong>
                                                     <h3 class="accordion-header">
                                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqc_{{$question->id}}">
-                                                            How does xxx work?
+                                                            {{$question->question}}
                                                         </button>
                                                     </h3>
                                                     <div id="faqc_{{$question->id}}" class="accordion-collapse collapse">
                                                         <div class="accordion-body">
-                                                            A: Magic!
+                                                            {{$question->answer}}!
                                                         </div>
                                                     </div>
                                                 </div>
