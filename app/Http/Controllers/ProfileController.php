@@ -40,7 +40,7 @@ class ProfileController extends Controller
             'profile_last_name'     => 'required|max:255',
             'profile_description' => 'required|max:255',
             'profile_biography' => 'required|max:472',
-            'profile_birthdate' => 'required',
+            'profile_birthdate' => 'required|date',
         ]);
 
         $user->first_name = $validated['profile_first_name'];
