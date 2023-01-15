@@ -7,5 +7,6 @@
 - https://laravel.com/docs/9.x/authentication
 - https://laravel.com/docs/9.x/sanctum
 - https://getbootstrap.com/docs/5.2/getting-started/vite/
-- https://medium.com/@laraveltuts/how-to-upload-avatar-in-laravel-a-step-by-step-guide-77557ce2a45
+- https://www.itsolutionstuff.com/post/laravel-profile-image-upload-tutorial-with-exampleexample.html
 - https://startbootstrap.com
+- https://startbootstrap.com/template/full-width-pics
