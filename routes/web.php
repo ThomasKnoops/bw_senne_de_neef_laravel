@@ -181,7 +181,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/faq/{id}/create', [FaqController::class, 'questionCreate'])->name('faq.question.create');
     Route::post('/faq/{id}/create', [FaqController::class, 'questionStore'])->name('faq.question.store');
-    Route::get('/faq/{id}/{cid}/edit', [FaqController::class, 'questionEdit'])->name('faq.question.edit');
+    Route::get('/faq/{cid}/{qid}/edit', [FaqController::class, 'questionEdit'])->name('faq.question.edit');
     Route::put('/faq/{cid}/{qid}', [FaqController::class, 'questionUpdate'])->name('faq.question.update');
     Route::delete('/faq/{cid}/{qid}', [FaqController::class, 'questionDelete'])->name('faq.question.delete');
 

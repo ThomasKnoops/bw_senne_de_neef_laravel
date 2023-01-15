@@ -1,4 +1,4 @@
-<x-layout-default title="Edit Profile">
+<x-layout-default title="Edit Project">
 
     <form method="POST" action="{{ route('project.update.thumbnail', $project->id) }}" enctype="multipart/form-data">
         @method('PUT')

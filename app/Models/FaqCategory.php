@@ -16,7 +16,7 @@ class FaqCategory extends Model
     protected $table = 'faq_categories';
 
     protected $fillable = [
-        'title',
+        'name',
     ];
 
     public function questions(): HasMany {

@@ -1,4 +1,4 @@
-<x-layout-default title="hello world">
+<x-layout-default title="Home Page">
 
     <section class="card">
         <div class="card-header">NEWS</div>

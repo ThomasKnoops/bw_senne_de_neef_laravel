@@ -6,29 +6,62 @@
                     <div class="card-body">
                         <div class="accordion">
                             <!-- foreach faq cat -->
+                            @foreach($categories as $category)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_{{$category->id}}">
+                                            {{$category->name}}
+                                        </button>
+                                    </h2>
+                                    <div id="faq_{{$category->id}}" class="accordion-collapse collapse">
+                                        <div class="accordion-body">
+                                            <div class="accordion">
+                                                <!-- foreach faq cat question-->
+                                                @foreach($category->questions as $question)
+                                                    <div class="accordion-item">
+                                                        <strong>Questions:</strong>
+                                                        <h3 class="accordion-header">
+                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqq_{{$question->id}}">
+                                                                {{$question->question}}
+                                                            </button>
+                                                        </h3>
+                                                        <div id="faqq_{{$question->id}}" class="accordion-collapse collapse">
+                                                            <div class="accordion-body">
+                                                                {{$question->answer}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_cat_00">
-                                        Categorie 1
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_contact">
+                                        Gebruikersvragen
                                     </button>
                                 </h2>
-                                <div id="faq_cat_00" class="accordion-collapse collapse">
+                                <div id="faq_contact" class="accordion-collapse collapse">
                                     <div class="accordion-body">
                                         <div class="accordion">
                                             <!-- foreach faq cat question-->
-                                            <div class="accordion-item">
-                                                <strong>Questions:</strong>
-                                                <h3 class="accordion-header">
-                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_cat_00_q_00">
-                                                        How does xxx work?
-                                                    </button>
-                                                </h3>
-                                                <div id="faq_cat_00_q_00" class="accordion-collapse collapse">
-                                                    <div class="accordion-body">
-                                                        A: Magic!
+                                            @foreach($contacts as $question)
+                                                <div class="accordion-item">
+                                                    <strong>Questions:</strong>
+                                                    <h3 class="accordion-header">
+                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqc_{{$question->id}}">
+                                                            How does xxx work?
+                                                        </button>
+                                                    </h3>
+                                                    <div id="faqc_{{$question->id}}" class="accordion-collapse collapse">
+                                                        <div class="accordion-body">
+                                                            A: Magic!
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-<x-layout-default title="Contact">
+<x-layout-default title="Admin Dashboard - FAQ Question Create">
 
     <div class="row justify-content-center">
         <div class="col-md-8">
