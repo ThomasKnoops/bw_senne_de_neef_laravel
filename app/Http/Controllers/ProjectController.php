@@ -57,16 +57,14 @@ class ProjectController extends Controller
     public function edit(Request $request, $id) {
         $project = Project::findOrFail($id);
         if(Auth::user()->id != $project->user_id) {
-            print('you are not the owner of this project2');
-            abort(403); //forbidden
+            abort(403, 'Only admins are allowed to use this route'); //forbidden
         }
         return view('pages.Project.edit', compact('project'));
     }
     public function update(Request $request, $id) {
         $project = Project::findOrFail($id);
         if(Auth::user()->id != $project->user_id) {
-            print('you are not the owner of this project3');
-            abort(403); //forbidden
+            abort(403, 'Only admins are allowed to use this route'); //forbidden
         }
 
         $validated = $request->validate([
@@ -85,8 +83,7 @@ class ProjectController extends Controller
     public function update_thumbnail(Request $request, $id) {
         $project = Project::findOrFail($id);
         if(Auth::user()->id != $project->user_id) {
-            print('you are not the owner of this project3');
-            abort(403); //forbidden
+            abort(403, 'Only admins are allowed to use this route'); //forbidden
         }
 
         $validated = $request->validate([
@@ -110,8 +107,7 @@ class ProjectController extends Controller
     public function update_cover(Request $request, $id) {
         $project = Project::findOrFail($id);
         if(Auth::user()->id != $project->user_id) {
-            print('you are not the owner of this project3');
-            abort(403); //forbidden
+            abort(403, 'Only admins are allowed to use this route'); //forbidden
         }
 
         $validated = $request->validate([

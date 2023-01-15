@@ -11,6 +11,9 @@
     $authRoutes = [
         'profile' => 'My Profile'
     ];
+    $adminRoutes = [
+        'admin.index' => 'Admin'
+    ]
 
 ?>
 
@@ -38,6 +41,14 @@
                     @endforeach
                 @endguest
                 @auth()
+                    @if(Auth::user()->isAdmin())
+                            @foreach($adminRoutes as $routeName => $routeLabel)
+                                <li class="nav-item nav-item-space">
+                                    <a href="{{route($routeName)}}" class="nav-link">{{$routeLabel}}</a>
+                                </li>
+                            @endforeach
+                    @endif
+
                     @foreach($authRoutes as $routeName => $routeLabel)
                         <li class="nav-item nav-item-space">
                             <a href="{{route($routeName)}}" class="nav-link">{{$routeLabel}}</a>

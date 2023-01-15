@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -175,14 +176,19 @@ Route::middleware('auth')->group(function(){
     //(adm)
     Route::get('/faq/create', [FaqController::class, 'categoryCreate'])->name('faq.category.create');
     Route::post('/faq/create', [FaqController::class, 'categoryStore'])->name('faq.category.store');
+    Route::get('/faq/{id}/edit', [FaqController::class, 'categoryEdit'])->name('faq.category.edit');
+
+
+    Route::get('/faq/{id}/create', [FaqController::class, 'questionCreate'])->name('faq.question.create');
+    Route::post('/faq/{id}/create', [FaqController::class, 'questionStore'])->name('faq.question.store');
+    Route::get('/faq/{id}/{cid}/edit', [FaqController::class, 'questionEdit'])->name('faq.question.edit');
+    Route::put('/faq/{cid}/{qid}', [FaqController::class, 'questionUpdate'])->name('faq.question.update');
+    Route::delete('/faq/{cid}/{qid}', [FaqController::class, 'questionDelete'])->name('faq.question.delete');
+
 
     Route::put('/faq/{id}', [FaqController::class, 'categoryUpdate'])->name('faq.category.update');
     Route::delete('/faq/{id}', [FaqController::class, 'categoryDelete'])->name('faq.category.delete');
 
-    Route::get('/faq/{id}/create', [FaqController::class, 'questionCreate'])->name('faq.question.create');
-    Route::post('/faq/{id}/create', [FaqController::class, 'questionStore'])->name('faq.question.store');
-    Route::put('/faq/{cid}/{qid}', [FaqController::class, 'questionUpdate'])->name('faq.question.update');
-    Route::delete('/faq/{cid}/{qid}', [FaqController::class, 'questionDelete'])->name('faq.question.delete');
 
 });
 //# [ANY]
@@ -202,3 +208,15 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', function () {
     return view('pages.About.show');
 })->name('about');
+
+
+/*
+ *  ADMIN
+ */
+//# [ADM]
+Route::middleware('auth')->group(function(){
+
+    //(adm)
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+});

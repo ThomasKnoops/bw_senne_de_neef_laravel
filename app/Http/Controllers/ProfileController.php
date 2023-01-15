@@ -78,6 +78,6 @@ class ProfileController extends Controller
          $target_user->save();
             return redirect()->route('profile.show', $id);
         }
-        abort(403);
+        abort(403, 'Only admins are allowed to use this route');
     }
 }

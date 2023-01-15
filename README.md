@@ -14,3 +14,4 @@
 - https://stackoverflow.com/questions/34009844/gd-library-extension-not-available-with-this-php-installation-ubuntu-nginx
 - https://css-tricks.com/almanac/properties/l/line-clamp/
 - https://laravel.com/docs/9.x/errors
+- https://stackoverflow.com/questions/34462190/how-to-change-laravel-models-table-name
