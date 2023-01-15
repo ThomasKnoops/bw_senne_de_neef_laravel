@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     public function show(Request $request, $id) {
-        $user = User::where('username', $id)->firstOrFail();
+        $user = User::where('id', $id)->firstOrFail();
         $projects = Project::where('user_id', $user->id)->paginate(10);
+
         return view('pages.Profile.show', compact('user', 'projects'));
     }
 
@@ -27,10 +28,11 @@ class ProfileController extends Controller
         return view('pages.Profile.index', compact('user', 'projects'));
     }
 
-    public function edit(Request $request, $id) {
-        return view('pages.Profile.edit');
+    public function edit(Request $request) {
+        $user = Auth::user();
+        return view('pages.Profile.edit', compact('user'));
     }
-    public function update(Request $request, $id) {
+    public function update(Request $request) {
 
     }
 }

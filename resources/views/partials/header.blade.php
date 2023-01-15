@@ -44,7 +44,10 @@
                         </li>
                     @endforeach
                     <li class="nav-item nav-item-space">
-                        <x-logout-button/>
+                        <form method="POST" action="{{route('logout.delete')}}">
+                            @csrf
+                            <a class="nav-link" onclick="this.parentNode.submit(); return false">Logout</a>
+                        </form>
                     </li>
                 @endauth
             </ul>
