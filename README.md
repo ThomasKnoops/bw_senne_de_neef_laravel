@@ -12,3 +12,5 @@
 - https://startbootstrap.com/template/full-width-pics
 - https://www.akilischool.com/cours/manipuler-les-images-dans-laravel-5
 - https://stackoverflow.com/questions/34009844/gd-library-extension-not-available-with-this-php-installation-ubuntu-nginx
+- https://css-tricks.com/almanac/properties/l/line-clamp/
+- https://laravel.com/docs/9.x/errors

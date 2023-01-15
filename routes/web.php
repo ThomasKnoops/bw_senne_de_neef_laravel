@@ -144,6 +144,8 @@ Route::middleware('auth')->group(function(){
     //(owned)
     Route::get('/project/{id}/edit', [Projectcontroller::class, 'edit'])->name('project.edit');
     Route::put('/project/{id}', [Projectcontroller::class, 'update'])->name('project.update');
+    Route::put('/project/{id}/thumbnail', [Projectcontroller::class, 'update_thumbnail'])->name('project.update.thumbnail');
+    Route::put('/project/{id}/cover', [Projectcontroller::class, 'update_cover'])->name('project.update.cover');
     Route::delete('/project/{id}', [Projectcontroller::class, 'destroy'])->name('project.delete');
 
 });

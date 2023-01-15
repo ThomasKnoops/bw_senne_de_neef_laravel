@@ -26,7 +26,9 @@
                                 <!-- Project name-->
                                 <h5 class="fw-bolder">{{$project->title}}</h5>
                                 <!-- Project description -->
-                                {{$project->content}}
+                                <p style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden">
+                                    {{$project->content}}
+                                </p>
                             </div>
                         </div>
                         <!-- Project actions-->

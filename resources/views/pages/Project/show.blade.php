@@ -3,7 +3,7 @@
     <!-- Header - set the background image for the header in the line below-->
     <div class="py-5 bg-image-full" style="background-image: url('/assets/project/{{$project->cover}}')">
         <div class="text-center my-5">
-            <h1 class="text-white fs-3 fw-bolder">{{$project->title}}</h1>
+            <h1 class="text-white fs-3 fw-bolder text-bg-dark">{{$project->title}}</h1>
         </div>
     </div>
 

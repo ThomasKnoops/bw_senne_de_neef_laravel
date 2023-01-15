@@ -55,16 +55,84 @@ class ProjectController extends Controller
         return redirect()->route('project.show', $project->id);
     }
     public function edit(Request $request, $id) {
-        if(Auth::user()->id != $id) {
+        $project = Project::findOrFail($id);
+        if(Auth::user()->id != $project->user_id) {
             print('you are not the owner of this project2');
+            abort(403); //forbidden
         }
-        return view('pages.Project.edit');
+        return view('pages.Project.edit', compact('project'));
     }
     public function update(Request $request, $id) {
-        if(Auth::user()->id != $id) {
+        $project = Project::findOrFail($id);
+        if(Auth::user()->id != $project->user_id) {
             print('you are not the owner of this project3');
+            abort(403); //forbidden
         }
+
+        $validated = $request->validate([
+            'project_title'    => 'required|max:255',
+            'project_content'     => 'required|max:255',
+        ]);
+
+        $project->title = $validated['project_title'];
+        $project->content = $validated['project_content'];
+
+        $project->save();
+
+        return redirect()->route('project.show', $project->id);
     }
+
+    public function update_thumbnail(Request $request, $id) {
+        $project = Project::findOrFail($id);
+        if(Auth::user()->id != $project->user_id) {
+            print('you are not the owner of this project3');
+            abort(403); //forbidden
+        }
+
+        $validated = $request->validate([
+            'project_thumbnail'    => 'required|image|mimes:png|max:4096',
+        ]);
+
+
+        $thumbnailImageName = $project->id . '-thumbnail.png';
+        $thumbnailFile = $validated['project_thumbnail'];
+        $thumbnailImage = Image::make($thumbnailFile);
+        $thumbnailImage = $thumbnailImage->resize(150, 150);
+        $thumbnailImage->save('assets/project/'. $thumbnailImageName);
+
+        $project->thumbnail = $thumbnailImageName;
+
+        $project->save();
+
+        return redirect()->route('project.show', $project->id);
+    }
+
+    public function update_cover(Request $request, $id) {
+        $project = Project::findOrFail($id);
+        if(Auth::user()->id != $project->user_id) {
+            print('you are not the owner of this project3');
+            abort(403); //forbidden
+        }
+
+        $validated = $request->validate([
+            'project_cover'    => 'required|image|mimes:png|max:4096',
+        ]);
+
+
+        $coverImageName = $project->id . '-cover.png';
+        $coverFile = $validated['project_thumbnail'];
+        $coverImage = Image::make($coverFile);
+        $coverImage = $coverImage->resize(1600, 900);
+        $coverImage->save('assets/project/'. $coverImageName);
+
+
+        $project->cover = $coverImageName;
+
+        $project->save();
+
+        return redirect()->route('project.show', $project->id);
+    }
+
     public function destroy(Request $request, $id) {
 
     }
